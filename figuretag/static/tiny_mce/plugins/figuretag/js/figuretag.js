@@ -1,4 +1,4 @@
-var BiblioTagDialog = {
+var FigureTagDialog = {
 	preInit : function() {
 		var url;
 
@@ -8,14 +8,16 @@ var BiblioTagDialog = {
 
 	init : function(ed) {
 		var f = document.forms[0], nl = f.elements, ed = tinyMCEPopup.editor, dom = ed.dom, n = ed.selection.getNode();
-
+		var loid = tinyMCEPopup.getWindowArg("id");
+		var lotype = tinyMCEPopup.getWindowArg("type");
 		tinyMCEPopup.resizeToInnerSize();
 		//this.fillClassList('class_list');
 		//this.fillFileList('src_list', fl);
 		//this.fillFileList('over_list', fl);
 		//this.fillFileList('out_list', fl);
 		TinyMCE_EditableSelects.init();
-
+		f.loid.value = loid;
+		f.lotype.value = lotype;
 	},
 
 	insert : function(file, title) {
@@ -38,14 +40,9 @@ var BiblioTagDialog = {
 		if (tinymce.isWebKit)
 			ed.getWin().focus();
 
-
 		el = ed.selection.getNode();
 
-		if (f.inline.value=="1") {
-			tagname = "ibib";
-		} else {
-			tagname = "bib";
-		}
+		tagname = "figure";
 
 		ed.execCommand('mceInsertContent', false, "["+tagname+"]"+f.citekey.value+"[/"+tagname+"]", {skip_undo : 1});
 		ed.undoManager.add();
@@ -88,5 +85,5 @@ var BiblioTagDialog = {
 
 };
 
-BiblioTagDialog.preInit();
-tinyMCEPopup.onInit.add(BiblioTagDialog.init, BiblioTagDialog);
+FigureTagDialog.preInit();
+tinyMCEPopup.onInit.add(FigureTagDialog.init, FigureTagDialog);

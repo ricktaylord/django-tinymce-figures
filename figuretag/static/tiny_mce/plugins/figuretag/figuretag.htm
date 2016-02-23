@@ -1,25 +1,26 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-	<title>{#bibliotag_dlg.dialog_title}</title>
+	<title>{#figuretag_dlg.dialog_title}</title>
 	<script type="text/javascript" src="../../tiny_mce_popup.js"></script>
 	<script type="text/javascript" src="../../utils/mctabs.js"></script>
 	<script type="text/javascript" src="../../utils/form_utils.js"></script>
 	<script type="text/javascript" src="../../utils/validate.js"></script>
 	<script type="text/javascript" src="../../utils/editable_selects.js"></script>
-	<script type="text/javascript" src="js/bibliotag.js"></script>
-	<script src="js/lib/require.js" data-main="js/select_bibliotag.js"></script>
+	<script type="text/javascript" src="js/figuretag.js"></script>
+	<script src="js/lib/require.js" data-main="js/select_figuretag.js"></script>
 	<link href="css/jquery-ui.css" rel="stylesheet" type="text/css" />
 	<link href="css/bibliotag.css" rel="stylesheet" type="text/css" />
 </head>
 <body id="bibliotag" style="display: none" role="application" aria-labelledby="app_title">
-	<span id="app_title" style="display:none">{#bibliotag_dlg.dialog_title}</span>
-	<form onsubmit="BiblioTagDialog.insert();return false;" action="#"> 
+	<span id="app_title" style="display:none">{#figuretag_dlg.dialog_title}</span>
+	<form onsubmit="FigureTagDialog.insert();return false;" action="#"> 
 		<div class="panel_wrapper">
-			<label for="biblio_select">Choose reference:<input id="biblio_select" /></label>
-			<input type="hidden" name="citekey" id="biblio_citekey" /><br />
-			<input type="radio" name="inline" value="1" />Inline
-			<input type="radio" name="inline" value="0" checked="checked">Footnote
+			<label for="figure_select">Choose files:<input id="figure_select" /></label><br />
+			<input type="hidden" name="refs" id="figure_refs" />
+			<input type="hidden" name="parent_id" id="figure_parent_id" />
+			<input type="hidden" name="parent_type" id="figure_parent_type" />
+			<textarea name="caption" id="figure_caption"></textarea>
 		</div>
 		<div class="mceActionPanel">
 			<input type="submit" id="insert" name="insert" value="{#insert}" />
