@@ -26,7 +26,7 @@ var FigureTagDialog = {
 			tinyMCEPopup.close();
 			return;
 		}
-		t.insertAndClose(file_refs);
+		this.insertAndClose(file_refs);
 	},
 
 	insertAndClose : function(file_refs, caption) {

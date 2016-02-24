@@ -13,8 +13,6 @@
 		init : function(ed, url) {
 			// Register commands
 			var pathArray = window.location.pathname.split( '/' );
-			console.debug(pathArray[pathArray.length - 2]);
-			console.debug(pathArray[pathArray.length - 3]);
 			ed.addCommand('mceFigureTag', function() {
 				// Internal image object like a flash placeholder
 				if (ed.dom.getAttrib(ed.selection.getNode(), 'class', '').indexOf('mceItem') != -1)
@@ -36,7 +34,7 @@
 			ed.addButton('figuretag', {
 				title : 'figuretag.desc',
 				cmd : 'mceFigureTag',
-				image: url + 'sample.gif'
+				image: url + '/img/sample.gif'
 			});
 		},
 
