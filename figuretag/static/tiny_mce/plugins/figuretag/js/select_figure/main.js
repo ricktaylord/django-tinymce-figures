@@ -1,24 +1,14 @@
 define(["jquery", "jquery-ui/autocomplete"], function($) {
     $(function() {
-        var cache = {};
-        $( "#biblio_select" ).autocomplete({
-            minLength: 2,
-            source: function( request, response ) {
-                var term = request.term;
-                if ( term in cache ) {
-                    response( cache[ term ] );
-                    return;
-                }
-         
-                $.getJSON( "/endnote/search/"+request.term+"/", function( data, status, xhr ) {
-                    cache[ term ] = data;
-                    response( data );
-                });
-            },
-            select: function( event, ui ) {
-                $( "#biblio_citekey" ).val(ui.item.id);
-                return false;
-            }
+        var parent_id = $( "input#figure_parent_id" );
+        var parent_type = $( "input#figure_parent_type" );
+        var $select = $("select#figure_ref")
+        $.getJSON( "/figures/get/"+parent_type+"/"+parent_id+"/", function( data, status, xhr ) {
+            $.each(json, function(key, value) {
+                $select.append('<option value="' + key + '"">' + value + '</option>');
+            });
+            response( data );
         });
+       
     });
 });

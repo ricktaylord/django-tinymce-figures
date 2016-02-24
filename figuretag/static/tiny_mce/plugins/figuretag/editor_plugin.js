@@ -9,20 +9,21 @@
  */
 
 (function() {
-	tinymce.create('tinymce.plugins.BiblioTagPlugin', {
+	tinymce.create('tinymce.plugins.FigureTagPlugin', {
 		init : function(ed, url) {
 			// Register commands
 			var pathArray = window.location.pathname.split( '/' );
-			var last_element = pathArray[pathArray.length - 1];
-			ed.addCommand('mceBiblioTag', function() {
+			console.debug(pathArray[pathArray.length - 2]);
+			console.debug(pathArray[pathArray.length - 3]);
+			ed.addCommand('mceFigureTag', function() {
 				// Internal image object like a flash placeholder
 				if (ed.dom.getAttrib(ed.selection.getNode(), 'class', '').indexOf('mceItem') != -1)
 					return;
 
 				ed.windowManager.open({
-					file : url + '/bibliotag.htm',
-					width : 480 + parseInt(ed.getLang('bibliotag.delta_width', 0)),
-					height : 385 + parseInt(ed.getLang('bibliotag.delta_height', 0)),
+					file : url + '/figuretag.htm',
+					width : 480 + parseInt(ed.getLang('figuretag.delta_width', 0)),
+					height : 385 + parseInt(ed.getLang('figuretag.delta_height', 0)),
 					inline : 1,					
 				}, {
 					plugin_url : url,
@@ -32,15 +33,16 @@
 			});
 
 			// Register buttons
-			ed.addButton('bibliotag', {
-				title : 'bibliotag.desc',
-				cmd : 'mceBiblioTag'
+			ed.addButton('figuretag', {
+				title : 'figuretag.desc',
+				cmd : 'mceFigureTag',
+				image: url + 'sample.gif'
 			});
 		},
 
 		getInfo : function() {
 			return {
-				longname : 'Biblio Tags for Drupal',
+				longname : 'Figure Tags for Drupal',
 				author : 'Rick Taylor',
 				authorurl : 'http://ricktaylordesign.co.uk',
 				version : tinymce.majorVersion + "." + tinymce.minorVersion
@@ -49,5 +51,5 @@
 	});
 
 	// Register plugin
-	tinymce.PluginManager.add('bibliotag', tinymce.plugins.BiblioTagPlugin);
+	tinymce.PluginManager.add('figuretag', tinymce.plugins.FigureTagPlugin);
 })();

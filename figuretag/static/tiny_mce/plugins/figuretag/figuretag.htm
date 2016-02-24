@@ -16,8 +16,7 @@
 	<span id="app_title" style="display:none">{#figuretag_dlg.dialog_title}</span>
 	<form onsubmit="FigureTagDialog.insert();return false;" action="#"> 
 		<div class="panel_wrapper">
-			<label for="figure_select">Choose files:<input id="figure_select" /></label><br />
-			<input type="hidden" name="refs" id="figure_refs" />
+			<label for="figure_ref">Choose files:<select multiple id="figure_refs"></select></label><br />
 			<input type="hidden" name="parent_id" id="figure_parent_id" />
 			<input type="hidden" name="parent_type" id="figure_parent_type" />
 			<textarea name="caption" id="figure_caption"></textarea>

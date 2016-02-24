@@ -16,22 +16,20 @@ var FigureTagDialog = {
 		//this.fillFileList('over_list', fl);
 		//this.fillFileList('out_list', fl);
 		TinyMCE_EditableSelects.init();
-		f.loid.value = loid;
-		f.lotype.value = lotype;
+		f.parent_id.value = loid;
+		f.parent_type.value = lotype;
 	},
 
-	insert : function(file, title) {
-		var ed = tinyMCEPopup.editor, t = this, f = document.forms[0];
-
-		if (f.citekey.value === '') {
+	insert : function() {
+		var file_refs = $("select#figure_refs").val();
+		if (!file_refs.length) {
 			tinyMCEPopup.close();
 			return;
 		}
-
-		t.insertAndClose();
+		t.insertAndClose(file_refs);
 	},
 
-	insertAndClose : function() {
+	insertAndClose : function(file_refs, caption) {
 		var ed = tinyMCEPopup.editor, f = document.forms[0], nl = f.elements, v, args = {}, el, tagname;
 
 		tinyMCEPopup.restoreSelection();
@@ -43,11 +41,18 @@ var FigureTagDialog = {
 		el = ed.selection.getNode();
 
 		tagname = "figure";
-
-		ed.execCommand('mceInsertContent', false, "["+tagname+"]"+f.citekey.value+"[/"+tagname+"]", {skip_undo : 1});
+		content="[figgroup]";
+		$.each(file_refs, function(i, val) {
+			content = content + "[figure:local:"+val+"]";
+		});
+		if(caption) {
+			content = content + "[figcaption]"+caption+"[/figcaption]";
+		}
+		content = content + "[/figgroup]";
+	
+		ed.execCommand('mceInsertContent', false, content, {skip_undo : 1});
 		ed.undoManager.add();
 	
-
 		tinyMCEPopup.editor.execCommand('mceRepaint');
 		tinyMCEPopup.editor.focus();
 		tinyMCEPopup.close();
